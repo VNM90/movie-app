@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boomer Video App</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body>
+<div class="wrapper">
+    <nav>
+        <div class="logo-image"></div>
+        <span class="logo-text">Boomer Video</span>
+        <a href="index.html"><i class="fa fa-home"></i><span class="icon-label">Home</span></a>
+        <a href="form.html"><i class="fa-solid fa-plus"></i><span class="icon-label">Add Movie</span></a>
+    </nav>
+    <main class="main-container">
+        <h1>Add new movie</h1>
+        <form class="movie-form" method="POST">
+            <input class="title" type="text" placeholder="Movie title" name="title" required>
+            <input class="author" type="text" placeholder="Movie author" name="author">
+            <textarea class="description" type="text" placeholder="Movie description" maxlength="350" rows="12" name="description"></textarea>
+            <div>
+                <span>Availability: </span>
+                <label for="radio-true">Yes</label>
+                <input id="radio-true" type="radio" value="true" name="available" required>
+                <label for="radio-false">No</label>
+                <input id="radio-false" type="radio" value="false" name="available" required>
+            </div>
+            <div>
+                <label for="date">Date: </label>
+                <input id="date" type="date" value="2022-04-24" name="year" required>
+            </div>
+            <button class="button-submit" type="submit">Submit</button>
+        </form>
+    </main>
+</div>
+    <script type="text/javascript" src="form.js"></script>
+</body>
+</html>
