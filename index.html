@@ -3,28 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Boomer Video App</title>
-    <link rel="stylesheet" href="styles.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
     <div class="wrapper">
         <nav>
             <div class="logo-image"></div>
-            <span class="logo-text">Boomer Video</span>
-            <a href="index.html"><i class="fa fa-home"></i><span class="icon-label">Home</span></a>
-            <a href="form.html"><i class="fa-solid fa-plus"></i><span class="icon-label">Add Movie</span></a>
+            <span class="logo-text">BOOMER<br>VIDEO</span>
+            <a href="index.html"><i class="fa fa-home"></i><span class="icon-label">HOME</span></a>
+            <a href="form.html"><i class="fa-solid fa-plus"></i><span class="icon-label">ADD MOVIE</span></a>
         </nav>
         <main class="main-container">
-            <h1>Movie List</h1>
+            <div class="hero">
+            <h1 class="retro">MOVIE LIST</h1>
+            <div class="search-wrapper">
+                <input class="search-input" type="text"/>
+                <button class="btn btn-search"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </div>
+            </div> 
             <div role="status" class="loading">
                 <span>Loading...</span>
             </div>
             <div class="div-movies"></div>
-            <div class="modal-movie"></div>
+            <dialog class="modal-movie"></dialog>
         </main>
     </div>
-    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" defer src="script.js"></script>
 </body>
 </html>
+
