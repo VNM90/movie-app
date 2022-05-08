@@ -1,16 +1,18 @@
 const baseUrl = "https://w-strapi-movies-app-9wxhf.ondigitalocean.app/api/movies";
 const movieForm = document.querySelector(".movie-form");
-let movieTitleArray = [];
+const loadingArea = document.querySelector(".loading");
+const searchButton = document.querySelector(".btn-search");
+const searchInput = document.querySelector(".search-input");
+let movieArray = [];
 
 // Defining async function
 async function getData(url) {
 
-    const loadingArea = document.querySelector(".loading")
     const response = await fetch(url);
 
     // Storing data in form of JSON
     const data = await response.json();
-
+  
     if(loadingArea) {
     // Storing response
         try {
@@ -27,22 +29,26 @@ async function getData(url) {
         }
     }
     if((movieForm) || (loadingArea)) {
+        movieArray.length = 0;
         for (let movie of data.data) {
-            movieTitleArray.push(movie.attributes.title)
+            movieArray.push(movie)
         }
-        return movieTitleArray;
+        return movieArray;
     }
 }
 
+
+// Function remove movie
 async function removeMovie(id, url= baseUrl) {
-    try {
-        await fetch(`${url}/${id}`, {
-            method: "DELETE"
-        })
-    }
-    catch (error) {
-        alert(error)
-    }
+
+        try {
+            await fetch(`${url}/${id}`, {
+                method: "DELETE"
+            })  
+        }
+        catch (error) {
+            alert(error)
+        }
     // Refreshing data after delete
     await getData(baseUrl);
 }
@@ -80,8 +86,6 @@ function showModalMain(id, title, description, author, available, year){
 // Function to define innerHTML for HTML table
 function showData(data) {
 
-    const searchInput = document.querySelector(".search-input");
-    const searchButton = document.querySelector(".btn-search")
     let movieTab = ``;
 
     // Loop to access all rows
@@ -105,6 +109,58 @@ function showData(data) {
 }
 
 
+function messageBox(message, link="#", secondLink="#") {
+    
+    const modalBox = document.querySelector(".message");
+
+    const msg = 
+
+    `<div>
+    <p>${message}</p>
+    <button class="btn btn-yes" onclick="window.location.href='${secondLink}';">YES</button>
+    <button class="btn btn-no" onclick="window.location.href='${link}';">NO</button>
+    </div>`
+
+    modalBox.innerHTML = msg
+    modalBox.showModal()
+}
+
+// Search
+if(loadingArea) {
+    searchButton.addEventListener("click", () => {
+        const searchedMovie = movieArray.filter(movie => movie.attributes.title.trim().toUpperCase() == searchInput.value.trim().toUpperCase());
+        for (let searchedMovieData of searchedMovie) {
+            const movieAvailability = searchedMovieData.attributes.available ? "Available" : "Not available";
+            movieTab =
+
+            `<table class="movie-table">
+            <tr><td class="movie movie-id">ID: ${searchedMovieData.id}</td></tr>
+            <tr><td class="movie movie-title">${searchedMovieData.attributes.title}</td></tr>
+            <tr><td class="movie movie-description">${searchedMovieData.attributes.description}</td></tr>
+            <tr><td class="movie movie-author">${searchedMovieData.attributes.author}</td></tr>
+            <tr><td class="movie movie-availability">${movieAvailability}</td></tr>
+            <tr><td><button class="btn btn-primary" onclick="removeMovie(${searchedMovieData.id})">DELETE</button></tr></td>
+            <tr><td><button class="btn btn-secondary" onclick="showModalMain(${searchedMovieData.id},'${searchedMovieData.attributes.title}','${searchedMovieData.attributes.description}','${searchedMovieData.attributes.author}', '${movieAvailability}', '${searchedMovieData.attributes.year}')">DETAILS</button></tr></td>
+            </table>`
+
+            document.querySelector(".div-movies").innerHTML = movieTab;
+        }
+        if((searchedMovie.length === 0) && (searchInput.value !== "")) {
+            document.querySelector(".div-movies").innerHTML = `<p>Movie not found</p>`;
+        }
+    })
+}
+
+
+if(searchInput) {
+    searchInput.addEventListener("input", () => {
+        if(searchInput.value == "") {
+            getData(baseUrl);
+        }
+    })
+}
+
+
 // Form
 if(movieForm) {
     movieForm.addEventListener("submit", async(event) => {
@@ -125,13 +181,13 @@ if(movieForm) {
                 year: movieYear
             } }
 
-        for (title of movieTitleArray) {
+        for (title of movieArray) {
             counter += 1; 
-            if (movieTitle.trim().toUpperCase() == title.trim().toUpperCase()) {
+            if (movieTitle.trim().toUpperCase() == title.attributes.title.trim().toUpperCase()) {
                 alert("SAME TITLE")
                 break;
             }
-            else if((counter == movieTitleArray.length) || (movieTitleArray.length == 0)){
+            else if((counter == movieArray.length) || (movieArray.length == 0)){
                 try {
                     const response = await fetch(baseUrl, {
                         method: "POST",
@@ -144,11 +200,9 @@ if(movieForm) {
                 catch (error) {
                     alert(error)
                 }
+            messageBox("DO YOU WANT TO ADD ANOTHER MOVIE?", "index.html", "form.html")
             movieForm.reset()
             }
         }
     })
-
 }
-
-

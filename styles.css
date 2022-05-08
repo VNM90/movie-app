@@ -46,9 +46,10 @@ nav {
 
 .search-input {
     padding: 16px;
-    border: 3px double var(--primary);
+    border: 3px double #7c7c7c;
     box-shadow: 10px 20px 20px -10px var(--primary) inset;
     background: #ecf8f8;
+    border-right: none;
 }
 
 .retro {
@@ -152,7 +153,6 @@ i {
 }
 
 .movie-table:last-child{
-    /* margin-bottom: 30px; */
     margin-right: 30px;
 }
 
@@ -164,7 +164,7 @@ i {
     padding-top: 14px;
 }
 
-.modal-movie {
+.modal-movie, .message {
     border: 3px double var(--primary);
     box-shadow: 10px 20px 20px -10px var(--primary) inset;
     background: #ecf8f8;
@@ -210,11 +210,11 @@ p {
 	background:#a81000;	
 }
 
-.btn-secondary {
+.btn-secondary, .btn-yes {
 	background: #0000bc;
 }
 
-.btn-secondary:hover, .btn-secondary:focus { 
+.btn-secondary:hover, .btn-secondary:focus, .btn-yes:hover { 
 	background: #0000fc;
 }
 
@@ -228,8 +228,8 @@ p {
 
 .btn-search {
     padding: 3px;
-    min-width: 5px;
     margin-left: 0;
+    min-width: 1px;;
 }
 	
 .movie-form {
@@ -245,22 +245,43 @@ textarea {
 
 .form-input {
     padding: 15px;
-    margin: 0.8px;
+    margin: 1px;
     border: 3px double var(--primary);
     box-shadow: 10px 20px 20px -10px var(--primary) inset;
     background: #ecf8f8;
     color: var(--form);
 }
 
+.form-input:focus, .search-input:focus {
+    outline:none;
+    border:1px solid var(--primary)
+} 
+
 .form-availability {
     color: var(--form);
-    margin-top: 15px;
-    margin-left: 15px;
+    margin: 30px auto 0 15px;
 }
 
 .form-data {
     color: var(--form);
-    margin: 15px;
+    margin: 30px auto 20px 15px;
+}
+
+input[type=radio] {
+    transform: scale(2);
+}
+
+.label-form{
+    font-size: 1.2rem;
+    line-height: 25px;
+}
+
+#radio-true {
+    accent-color: #006800;
+}
+
+#radio-false {
+    accent-color: #a81000; 
 }
 
 #date {

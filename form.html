@@ -26,18 +26,20 @@
             <input class="form-input author" type="text" placeholder="Movie author" name="author">
             <textarea class="form-input description" type="text" placeholder="Movie description" maxlength="640" rows="12" name="description"></textarea>
             <div class="form-availability">
-                <span>Availability: </span>
-                <label for="radio-true">Yes</label>
+                <span class="label-form">Availability: </span>
+                <label for="radio-true" class="label-form">Yes</label>
                 <input id="radio-true" type="radio" value="true" name="available" required>
-                <label for="radio-false">No</label>
+                <label for="radio-false" class="label-form">No</label>
                 <input id="radio-false" type="radio" value="false" name="available" required>
             </div>
             <div class="form-data">
-                <label for="date">Date: </label>
+                <label for="date" class="label-form">Date: </label>
                 <input id="date" type="date" value="2022-04-24" name="year" required>
             </div>
             <button class="btn btn-submit" type="submit">SUBMIT</button>
         </form>
+        <dialog class="modal-movie"></dialog>
+        <dialog class="message"></dialog>
     </main>
 </div>
     <script type="text/javascript" defer src="script.js"></script>
